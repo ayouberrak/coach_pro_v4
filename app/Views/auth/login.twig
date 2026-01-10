@@ -1,2 +1,38 @@
-<!-- Login View -->
-<form>Login</form>
+{% extends "layouts/base.twig" %}
+
+{% block title %}Connexion - CoachPro{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center" style="min-height: 80vh;">
+    <div class="card" style="width: 100%; max-width: 400px; padding: 2.5rem;">
+        <div class="text-center mb-8">
+            <h1 class="logo mb-4" style="font-size: 2rem;">Coach<span>Pro</span></h1>
+            <p class="text-gray">Bienvenue ! Connectez-vous à votre espace.</p>
+        </div>
+
+        <form action="/login" method="POST">
+            <div class="mb-4">
+                <label class="block text-gray mb-2" style="font-size: 0.9rem;">Email</label>
+                <input type="email" name="email" 
+                       style="width: 100%; padding: 0.75rem; background: var(--bg-input); border: 1px solid var(--border-color); color: white; border-radius: 8px; outline: none;"
+                       placeholder="exemple@email.com" required>
+            </div>
+            
+            <div class="mb-8">
+                <label class="block text-gray mb-2" style="font-size: 0.9rem;">Mot de passe</label>
+                <input type="password" name="password"
+                       style="width: 100%; padding: 0.75rem; background: var(--bg-input); border: 1px solid var(--border-color); color: white; border-radius: 8px; outline: none;"
+                       placeholder="Votre mot de passe" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Se Connecter
+            </button>
+        </form>
+
+        <div class="text-center mt-6">
+            <a href="#" class="text-gray" style="font-size: 0.9rem;">Mot de passe oublié?</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
