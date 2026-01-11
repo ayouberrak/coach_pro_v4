@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use Services\AuthServices;
+
 
 class AuthController extends Controller {
     
