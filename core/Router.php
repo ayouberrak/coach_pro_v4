@@ -16,30 +16,24 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Normalization for Windows
         $path = str_replace('\\', '/', $path);
         
         $scriptName = $_SERVER['SCRIPT_NAME'];
         $scriptDir = dirname($scriptName);
         $scriptDir = str_replace('\\', '/', $scriptDir);
 
-        // Logic to strip the base path
-        // Case 1: Request URI starts with the full script path (e.g. /project/public/...)
         if (strpos($path, $scriptDir) === 0 && $scriptDir !== '/') {
             $path = substr($path, strlen($scriptDir));
         }
-        // Case 2: Request URI starts with the parent of script path (hidden public via .htaccess)
-        // e.g. Script: /project/public/index.php, Request: /project/dashboard
         elseif (strpos($path, dirname($scriptDir)) === 0 && dirname($scriptDir) !== '/') {
             $path = substr($path, strlen(dirname($scriptDir)));
         }
 
-        // Ensure path starts with /
         if ($path === '' || $path[0] !== '/') {
             $path = '/' . $path;
         }
 
-        // Debugging: echo "Path: $path"; exit;
+
 
         $callback = $this->routes[$method][$path] ?? false;
 
