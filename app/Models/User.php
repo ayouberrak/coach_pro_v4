@@ -2,14 +2,14 @@
 namespace App\Models;
 
 class User {
-    private int $id;
+    private ?int $id;
     private string $firstName;
     private string $lastName;
     private string $email;
     private string $passwordHash;
     private int $role;
 
-    public function __construct(int $id , string $firstName, string $lastName, string $email, string $passwordHash, int $role) {
+    public function __construct(?int $id = null, string $firstName, string $lastName, string $email, string $passwordHash, int $role) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -50,5 +50,5 @@ class User {
     public function setRole(int $role): void {
         $this->role = $role;
     }
-    
+
 }
