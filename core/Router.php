@@ -41,7 +41,11 @@ class Router {
             if (is_array($callback)) {
                 $controller = new $callback[0]();
                 $method = $callback[1];
-                return $controller->$method();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    return $controller->$method($_POST);
+                } else {
+                    return $controller->$method(); // GET
+                }
             }
             call_user_func($callback);
         } else {
