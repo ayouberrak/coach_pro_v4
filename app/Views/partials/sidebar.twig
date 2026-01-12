@@ -1,36 +1,84 @@
-<aside class="sidebar">
-    <nav class="sidebar-nav">
-        <!-- Common Links -->
-        <a href="/dashboard" class="sidebar-item active">
-            <i class="fa-solid fa-chart-pie"></i> Dashboard
-        </a>
+<aside class="w-60 min-h-screen bg-darkCard border-r border-borderGray flex flex-col transition-all duration-300">
+    <div class="p-6 mb-4">
+        <h1 class="text-xl font-bold text-white tracking-tight">
+            Coach<span class="text-primaryGold">Pro</span>
+        </h1>
+    </div>
+
+    <nav class="flex-1 px-4 space-y-2">
+        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest px-3 mb-2">Général</div>
+        {% if user_role == 2 %}
+            <a href="{{url('/coach/dashboard')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group hover:bg-primaryGold/10 hover:text-primaryGold {{ app.request.uri == '/dashboard' ? 'bg-primaryGold/10 text-primaryGold border border-primaryGold/20' : 'text-gray-400' }}">
+                <i class="fa-solid fa-chart-pie text-lg"></i>
+                <span>Dashboard</span>
+            </a>
+        {% else %}
+            <a href="{{url('/sportif/dashboard')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group hover:bg-primaryGold/10 hover:text-primaryGold {{ app.request.uri == '/dashboard' ? 'bg-primaryGold/10 text-primaryGold border border-primaryGold/20' : 'text-gray-400' }}">
+                <i class="fa-solid fa-chart-pie text-lg"></i>
+                <span>Dashboard</span>
+            </a>
+        {% endif %}
+
+        <hr class="border-borderGray/50 my-4 mx-2">
 
         {# Role Based Navigation Logic #}
         {% if user_role == 2 %}
-            <div class="sidebar-label" style="padding: 1rem; font-size: 0.75rem; color: #6b6b6b; text-transform: uppercase; font-weight: 600;">Coach Menu</div>
+            <div class="text-[10px] font-bold text-primaryGold uppercase tracking-widest px-3 mb-2 opacity-80">Menu Coach</div>
             
-            <a href="/coach/sessions" class="sidebar-item">
-                <i class="fa-solid fa-calendar-check"></i> Mes Séances
+            <a href="{{url('/coach/reservations')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 transition-all hover:bg-primaryGold/10 hover:text-primaryGold group">
+                <i class="fa-solid fa-calendar-check text-lg group-hover:scale-110 transition-transform"></i>
+                <span>Mes Séances</span>
             </a>
-            <a href="/coach/clients" class="sidebar-item">
-                <i class="fa-solid fa-users"></i> Mes Clients
-            </a>
-            <a href="/coach/availability" class="sidebar-item">
-                <i class="fa-solid fa-clock"></i> Disponibilités
+
+            <a href="{{url('/coach/disponibilities')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 transition-all hover:bg-primaryGold/10 hover:text-primaryGold group">
+                <i class="fa-solid fa-clock text-lg group-hover:scale-110 transition-transform"></i>
+                <span>Disponibilités</span>
             </a>
 
         {% else %}
-            <div class="sidebar-label" style="padding: 1rem; font-size: 0.75rem; color: #6b6b6b; text-transform: uppercase; font-weight: 600;">Espace Sportif</div>
+            <div class="text-[10px] font-bold text-primaryGold uppercase tracking-widest px-3 mb-2 opacity-80">Espace Sportif</div>
             
-            <a href="/sportif/coaches" class="sidebar-item">
-                <i class="fa-solid fa-dumbbell"></i> Trouver un Coach
+            <a href="{{url('/sportif/coaches')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 transition-all hover:bg-primaryGold/10 hover:text-primaryGold group">
+                <i class="fa-solid fa-dumbbell text-lg group-hover:scale-110 transition-transform"></i>
+                <span>Trouver un Coach</span>
             </a>
-            <a href="/sportif/reservations" class="sidebar-item">
-                <i class="fa-solid fa-calendar-days"></i> Mes Réservations
+
+            <a href="{{url('/sportif/seances')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 transition-all hover:bg-primaryGold/10 hover:text-primaryGold group">
+                <i class="fa-solid fa-calendar-days text-lg group-hover:scale-110 transition-transform"></i>
+                <span>Mes Réservations</span>
             </a>
-            <a href="/sportif/history" class="sidebar-item">
-                <i class="fa-solid fa-clock-rotate-left"></i> Historique
-            </a>
+
         {% endif %}
     </nav>
+
+    <div class="p-4 space-y-2 border-t border-borderGray">
+    {%if user_role == 2 %}
+        <a href="{{url('/coach/profile')}}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors group">
+            <div class="w-8 h-8 rounded-lg bg-primaryGold flex items-center justify-center text-darkBg font-bold text-xs uppercase">
+                {{ user.prenom|slice(0, 1) }}
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-xs font-bold text-white truncate">{{ user.prenom }}</p>
+                <p class="text-[10px] text-gray-500 truncate">Voir Profil</p>
+            </div>
+            <i class="fa-solid fa-gear text-gray-600 group-hover:text-primaryGold transition-colors text-xs"></i>
+        </a>
+    {% else %}
+        <a href="{{url('/sportif/profile')}}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors group">
+            <div class="w-8 h-8 rounded-lg bg-primaryGold flex items-center justify-center text-darkBg font-bold text-xs uppercase">
+                {{ user.prenom|slice(0, 1) }}
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-xs font-bold text-white truncate">{{ user.prenom }}</p>
+                <p class="text-[10px] text-gray-500 truncate">Voir Profil</p>
+            </div>
+            <i class="fa-solid fa-gear text-gray-600 group-hover:text-primaryGold transition-colors text-xs"></i>
+        </a>
+    {% endif %}
+
+        <a href="{{url('/logout')}}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500/70 hover:text-red-500 hover:bg-red-500/10 transition-all group">
+            <i class="fa-solid fa-arrow-right-from-bracket text-lg transition-transform group-hover:translate-x-1"></i>
+            <span>Déconnexion</span>
+        </a>
+    </div>
 </aside>
