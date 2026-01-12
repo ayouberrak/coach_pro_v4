@@ -16,7 +16,18 @@ $router->get('/logout', [App\Controllers\AuthController::class, 'logout']);
 
 $router->get('/coach/profile', [App\Controllers\ProfileController::class, 'showProfile']);
 
+$router->get('/coach/reservations', [App\Controllers\ReservationController::class, 'index']);
+
+$router->get('/coach/disponibilities', [App\Controllers\DispoController::class, 'index']);
+
 $router->get('/coach/dashboard', [App\Controllers\CoachController::class, 'index']);
+
+
 $router->get('/sportif/dashboard', [App\Controllers\SportifController::class, 'index']);
+$router->get('/sportif/coaches', [App\Controllers\CoachsController::class, 'index']);
+$router->get('/sportif/seances', [App\Controllers\SeanceController::class, 'index']);
+$router->get('/sportif/profile', [App\Controllers\ProfileSportifController::class, 'showProfile']);
+
+
 $router->get('/login', [App\Controllers\AuthController::class, 'login']);
 
