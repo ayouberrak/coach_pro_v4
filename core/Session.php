@@ -2,5 +2,5 @@
 namespace Core;
 
 class Session {
-    // Session management
+    
 }
