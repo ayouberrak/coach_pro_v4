@@ -15,7 +15,8 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        
+    
+    {% for coache in coaches %}        
         <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-6 group hover:border-primaryGold/40 transition-all duration-500 shadow-xl">
             <div class="relative mb-6 overflow-hidden rounded-[2rem] h-64 shadow-2xl">
                 <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" 
@@ -28,7 +29,7 @@
 
             <div class="space-y-2">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-black text-white tracking-tight italic">Mike Hammer</h3>
+                  <h3 class="text-xl font-black text-white tracking-tight italic">{{ coache.firstName }} {{ coache.lastName }}</h3>
                     <div class="flex items-center gap-1 text-primaryGold text-[10px]">
                         <i class="fa-solid fa-star"></i>
                         <span class="font-black">4.9</span>
@@ -44,64 +45,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-6 group hover:border-primaryGold/40 transition-all duration-500 shadow-xl">
-            <div class="relative mb-6 overflow-hidden rounded-[2rem] h-64 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1518611012118-29a8d63e8029?w=500&q=80" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent opacity-60"></div>
-                <div class="absolute bottom-4 left-4">
-                    <span class="bg-primaryGold text-darkBg text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Yoga & Zen</span>
-                </div>
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-black text-white tracking-tight italic">Sarah Slim</h3>
-                    <div class="flex items-center gap-1 text-primaryGold text-[10px]">
-                        <i class="fa-solid fa-star"></i>
-                        <span class="font-black">5.0</span>
-                    </div>
-                </div>
-                <p class="text-gray-500 text-xs font-medium line-clamp-2">Spécialiste en souplesse et bien-être mental. Coaching personnalisé pour tous niveaux.</p>
-                
-                <div class="pt-6 flex items-center justify-between border-t border-borderGray/30 mt-4">
-                    <span class="text-white font-black text-sm italic underline decoration-primaryGold/30 underline-offset-4 tracking-tighter">5 Ans Exp.</span>
-                    <a href="/sportif/coach/2" class="p-3 bg-white/5 hover:bg-primaryGold text-white hover:text-darkBg rounded-xl transition-all border border-borderGray">
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-6 group hover:border-primaryGold/40 transition-all duration-500 shadow-xl">
-            <div class="relative mb-6 overflow-hidden rounded-[2rem] h-64 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1491752346730-c1f19b812943?w=500&q=80" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent opacity-60"></div>
-                <div class="absolute bottom-4 left-4">
-                    <span class="bg-primaryGold text-darkBg text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Crossfit</span>
-                </div>
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-black text-white tracking-tight italic">Alex Burn</h3>
-                    <div class="flex items-center gap-1 text-primaryGold text-[10px]">
-                        <i class="fa-solid fa-star"></i>
-                        <span class="font-black">4.8</span>
-                    </div>
-                </div>
-                <p class="text-gray-500 text-xs font-medium line-clamp-2">Dépassez vos limites avec des entraînements haute intensité. Résultats garantis.</p>
-                
-                <div class="pt-6 flex items-center justify-between border-t border-borderGray/30 mt-4">
-                    <span class="text-white font-black text-sm italic underline decoration-primaryGold/30 underline-offset-4 tracking-tighter">10 Ans Exp.</span>
-                    <a href="/sportif/coach/3" class="p-3 bg-white/5 hover:bg-primaryGold text-white hover:text-darkBg rounded-xl transition-all border border-borderGray">
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+    {% endfor %}
 
         <div class="bg-darkCard/40 border border-dashed border-borderGray rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center group hover:border-primaryGold transition-all">
             <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
