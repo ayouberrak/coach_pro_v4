@@ -6,10 +6,16 @@
         
         <div class="nav-links">
             <!-- User Dropdown or Profile Link -->
-            <a href="{{url('/coach/profile')}}" class="nav-link">
-                <i class="fa-solid fa-user-circle"></i> Profile
-            </a>
-            <a href="/logout" class="nav-link text-gold">
+            {%if user_role == 2 %}
+                <a href="{{url('/coach/profile')}}" class="nav-link">
+                    <i class="fa-solid fa-user-circle"></i> Profile
+                </a>
+            {% else %}
+                <a href="{{url('/sportif/profile')}}" class="nav-link">
+                    <i class="fa-solid fa-user-circle"></i> Profile
+                </a>
+            {% endif %}
+            <a href="{{url('/logout')}}" class="nav-link text-gold">
                 <i class="fa-solid fa-sign-out-alt"></i> Logout
             </a>
         </div>
