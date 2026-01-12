@@ -11,8 +11,8 @@ class Coach extends User {
 
     
 
-    public function __construct(?int $id = null, string $firstName, string $lastName, string $email, string $passwordHash, int $role,
-                                ?int $id_coach = null, string $biographie, string $photo, int $annee_experience, string $certefications) {
+    public function __construct(?int $id = null, string $firstName  = '', string $lastName = '', string $email = '', string $passwordHash = '', int $role = 2,
+                                ?int $id_coach = null, string $biographie , string $photo , int $annee_experience, string $certefications ) {
         parent::__construct($id, $firstName, $lastName, $email, $passwordHash, $role);
         $this->id_coach = $id_coach;
         $this->biographie = $biographie;
@@ -47,4 +47,21 @@ class Coach extends User {
     public function setCertefications(string $certefications): void {
         $this->certefications = $certefications;
     }
+
+    public static function createFromArrayC(array $data): Coach {
+        return new Coach(
+            $data['id'] ?? null,
+            $data['firstName'] ?? '',
+            $data['lastName'] ?? '',
+            $data['email'] ?? '',
+            $data['passwordHash'] ?? '',
+            $data['role'] ?? 2,
+            $data['id_coach'] ?? null,
+            $data['biographie'] ?? '',
+            $data['photo'] ?? '',
+            $data['annee_experience'] ?? 0,
+            $data['certefications'] ?? ''
+        );
+    }
+    
 }
