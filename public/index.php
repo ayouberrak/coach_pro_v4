@@ -8,9 +8,7 @@ use Core\Router;
 define('BASE_URL', '/coachPro_v3');
 $router = new Router();
 
-// Load Routes
 require_once __DIR__ . '/../routes/web.php';
 
-// Dispatch
 $router->dispatch();
 
