@@ -2,77 +2,126 @@
 
 {% block title %}Mon Espace - CoachPro{% endblock %}
 
-{% block content %}
-<div class="dashboard-content">
-    <div class="mb-8 flex justify-between items-center">
+{% block body %}
+<div class="max-w-6xl mx-auto animate-fade-in pb-12">
+    
+    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-            <h1 class="text-white font-bold" style="font-size: 2rem;">Mon Espace Sportif</h1>
-            <p class="text-gray">Prêt pour votre entraînement aujourd'hui?</p>
+            <h1 class="text-white font-black tracking-tighter uppercase" style="font-size: 2.2rem;">Mon Espace <span class="text-primaryGold">Sportif</span></h1>
+            <p class="text-gray-500 font-medium italic mt-1">Prêt pour votre entraînement aujourd'hui?</p>
         </div>
-        <a href="/sportif/coaches" class="btn btn-primary">
-            <i class="fa-solid fa-magnifying-glass" style="margin-right: 0.5rem;"></i> Trouver un Coach
+        <a href="/sportif/coaches" class="bg-primaryGold hover:bg-yellow-600 text-darkBg px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-primaryGold/10 flex items-center gap-3">
+            <i class="fa-solid fa-magnifying-glass text-sm"></i> Trouver un Coach
         </a>
     </div>
 
-    <div class="stats-grid">
-         <div class="card stat-card">
-            <h3>SÉANCES COMPLÉTÉES</h3>
-            <div class="stat-value">24</div>
-            <div class="stat-trend">
-                <i class="fa-solid fa-trophy"></i> Total à vie
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-primaryGold/30 transition-all">
+            <div class="absolute top-0 right-0 p-6 text-primaryGold/10 group-hover:text-primaryGold/20 transition-all">
+                <i class="fa-solid fa-trophy text-6xl"></i>
             </div>
+            <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Séances Complétées</h3>
+            <div class="flex items-baseline gap-2">
+                <span class="text-5xl font-black text-white tracking-tighter">24</span>
+                <span class="text-primaryGold font-bold italic">Total</span>
+            </div>
+            <p class="text-gray-600 text-[11px] font-bold mt-4 uppercase tracking-widest flex items-center gap-2">
+                <i class="fa-solid fa-arrow-up-long text-green-500"></i> +3 cette semaine
+            </p>
         </div>
-         <div class="card stat-card">
-            <h3>PROCHAINE SÉANCE</h3>
-            <div class="stat-value" style="font-size: 1.5rem;">Aujourd'hui, 18:00</div>
-             <div class="stat-trend">
-                <i class="fa-solid fa-dumbbell"></i> Musculation avec Coach Mike
+
+        <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-primaryGold/30 transition-all shadow-2xl">
+            <div class="absolute top-0 right-0 p-6 text-primaryGold/10">
+                <i class="fa-solid fa-calendar-check text-6xl"></i>
+            </div>
+            <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4 text-primaryGold">Prochaine Séance</h3>
+            <div class="text-3xl font-black text-white tracking-tight">Aujourd'hui, 18:00</div>
+            <div class="flex items-center gap-3 mt-4">
+                <div class="w-8 h-8 rounded-full bg-primaryGold/10 flex items-center justify-center">
+                    <i class="fa-solid fa-dumbbell text-primaryGold text-xs"></i>
+                </div>
+                <p class="text-sm text-gray-400 font-medium tracking-tight">Musculation avec <span class="text-white font-bold italic underline decoration-primaryGold/30">Coach Mike</span></p>
             </div>
         </div>
     </div>
 
-    <div class="grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem;">
-        <!-- Left Column: Reservations -->
-        <div class="card">
-            <h2 class="text-white font-bold mb-4">Mes Réservations</h2>
-             <div class="table-container">
-                <table>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 bg-darkCard border border-borderGray rounded-[2.5rem] p-8">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-xl font-black italic uppercase tracking-tighter text-white">Mes Réservations</h2>
+                <div class="h-[1px] flex-1 bg-borderGray/30 mx-6"></div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-separate border-spacing-y-3">
                     <thead>
-                        <tr>
-                            <th>Coach</th>
-                            <th>Date</th>
-                            <th>Statut</th>
+                        <tr class="text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                            <th class="px-4 pb-2">Coach</th>
+                            <th class="px-4 pb-2">Date & Heure</th>
+                            <th class="px-4 pb-2 text-right">Statut</th>
                         </tr>
                     </thead>
-                    <tbody>
-                         <tr>
-                            <td>Coach Mike</td>
-                            <td>10 Jan, 18:00</td>
-                            <td><span class="status status-pending">Confirmé</span></td>
+                    <tbody class="text-sm">
+                        <tr class="bg-white/5 hover:bg-white/[0.08] transition-all group">
+                            <td class="px-4 py-5 rounded-l-2xl border-l border-y border-borderGray/50 group-hover:border-primaryGold/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-primaryGold/10 flex items-center justify-center text-primaryGold font-black text-[10px]">CM</div>
+                                    <span class="font-bold text-white tracking-tight">Coach Mike</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-5 border-y border-borderGray/50 group-hover:border-primaryGold/30">
+                                <span class="text-gray-400 font-medium italic">10 Jan, 18:00</span>
+                            </td>
+                            <td class="px-4 py-5 rounded-r-2xl border-r border-y border-borderGray/50 text-right group-hover:border-primaryGold/30">
+                                <span class="bg-green-500/10 text-green-500 text-[9px] font-black uppercase px-3 py-1.5 rounded-lg border border-green-500/20">Confirmé</span>
+                            </td>
                         </tr>
-                         <tr>
-                            <td>Sarah Fit</td>
-                            <td>12 Jan, 10:00</td>
-                            <td><span class="status status-pending">En attente</span></td>
+                        <tr class="bg-white/5 hover:bg-white/[0.08] transition-all group">
+                            <td class="px-4 py-5 rounded-l-2xl border-l border-y border-borderGray/50 group-hover:border-primaryGold/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500 font-black text-[10px]">SF</div>
+                                    <span class="font-bold text-white tracking-tight">Sarah Fit</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-5 border-y border-borderGray/50 group-hover:border-primaryGold/30">
+                                <span class="text-gray-400 font-medium italic">12 Jan, 10:00</span>
+                            </td>
+                            <td class="px-4 py-5 rounded-r-2xl border-r border-y border-borderGray/50 text-right group-hover:border-primaryGold/30">
+                                <span class="bg-orange-500/10 text-orange-500 text-[9px] font-black uppercase px-3 py-1.5 rounded-lg border border-orange-500/20">En attente</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Right Column: Quick Profile/Tips -->
-         <div class="card" style="background: linear-gradient(180deg, var(--bg-card) 0%, rgba(207, 170, 88, 0.05) 100%);">
-            <h3 class="text-gold font-bold mb-2">Conseil du Jour</h3>
-            <p class="text-gray mb-4" style="font-size: 0.9rem;">
-                L'hydratation est la clé de la performance. Buvez au moins 500ml d'eau 2h avant votre séance.
-            </p>
-            <div style="width: 100%; height: 1px; background: var(--border-color); margin: 1rem 0;"></div>
-             <h3 class="text-white font-bold mb-2">Mon Abonnement</h3>
-             <div class="flex items-center justify-between">
-                <span class="status status-active">Premium</span>
-                <span class="text-gray" style="font-size: 0.8rem;">Expire le 20 Fév</span>
-             </div>
+        <div class="space-y-6">
+            <div class="bg-gradient-to-br from-darkCard to-primaryGold/5 border border-borderGray rounded-[2.5rem] p-8 relative overflow-hidden group">
+                <i class="fa-solid fa-lightbulb absolute -top-2 -right-2 text-primaryGold/10 text-6xl rotate-12 group-hover:rotate-0 transition-all"></i>
+                <h3 class="text-primaryGold text-[10px] font-black uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-primaryGold rounded-full animate-pulse"></span> Conseil du Jour
+                </h3>
+                <p class="text-gray-300 leading-relaxed font-medium italic text-sm">
+                    " L'hydratation est la clé de la performance. Buvez au moins 500ml d'eau 2h avant votre séance. "
+                </p>
+            </div>
+
+            <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-8">
+                <h3 class="text-white text-[10px] font-black uppercase tracking-[0.2em] mb-6">Mon Abonnement</h3>
+                <div class="flex items-center justify-between bg-darkInput p-4 rounded-2xl border border-borderGray/50">
+                    <span class="bg-primaryGold text-darkBg text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg shadow-primaryGold/20">Premium</span>
+                    <div class="text-right">
+                        <p class="text-white font-bold text-xs italic tracking-tighter">20 Fév</p>
+                        <p class="text-gray-600 text-[8px] font-black uppercase">Expiration</p>
+                    </div>
+                </div>
+                <button class="w-full mt-6 py-3 border border-borderGray hover:border-primaryGold/50 text-gray-500 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all rounded-xl">
+                    Gérer mon plan
+                </button>
+            </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
