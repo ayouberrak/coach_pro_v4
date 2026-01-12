@@ -1,31 +1,65 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CoachPro{% endblock %}</title>
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ base_url }}/assets/css/style.css">
-</head>
-<body>
-
-    {% include 'partials/header.twig' %}
-
-    <div class="dashboard-layout">
-        {% include 'partials/sidebar.twig' ignore missing %}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f1014',
+                        darkCard: '#18191e',
+                        darkInput: '#23242a',
+                        primaryGold: '#cfaa58',
+                        primaryGoldHover: '#e0b045',
+                        borderGray: '#2a2b30',
+                    },
+                    fontFamily: { outfit: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f1014; }
+        ::-webkit-scrollbar-thumb { background: #2a2b30; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cfaa58; }
         
-        <main class="main-content">
-            {% block content %}{% endblock %}
-        </main>
+        /* Bash l-body may-kounch fih scroll l-barra */
+        body { overflow: hidden; height: 100vh; }
+    </style>
+</head>
+<body class="bg-darkBg font-outfit text-white">
+
+    {# {% include 'partials/header.twig' %} #}
+
+    <div class="flex h-full w-full">
+        
+        <aside class="shrink-0">
+            {% include 'partials/sidebar.twig' ignore missing %}
+        </aside>
+
+        <div class="flex-1 flex flex-col min-w-0 h-full">
+            
+            <div class="h-16 border-b border-borderGray flex items-center px-8 shrink-0 bg-darkBg">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                    {% block page_name %}Espace{% endblock %}
+                </span>
+            </div>
+
+            <main class="flex-1 overflow-y-auto p-6 lg:p-10">
+                <div class="container mx-auto">
+                    {% block body %}{% endblock %}
+                </div>
+            </main>
+        </div>
     </div>
 
     {% block scripts %}{% endblock %}
