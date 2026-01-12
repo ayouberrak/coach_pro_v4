@@ -23,7 +23,7 @@ class CoachRepository {
         try {
             $userId = (int)$this->db->lastInsertId();
 
-            $stmt = $this->db->prepare("INSERT INTO coaches (id_coach, biographie, photo, annees_experience, certification) 
+            $stmt = $this->db->prepare("INSERT INTO coach (id_coach, biographie, photo, annees_experience, certification) 
                                         VALUES (:id_coach, :biographie, :photo, :annees_experience, :certification)");
             $stmt->bindValue(':id_coach', $userId);
             $stmt->bindValue(':biographie', $coach->getBiographie());
