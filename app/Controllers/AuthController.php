@@ -40,7 +40,7 @@ class AuthController extends Controller {
             $coachData = [
                 'biographie' => $data['biographie'] ?? '',
                 'photo' => $new_file_name,
-                'annee_experience' => $data['experience'] ?? 0,
+                'anneeExperience' => $data['experience'] ?? 0,
                 'certefications' => $data['certification'] ?? ''
             ];
         } elseif($role === 1){ 
