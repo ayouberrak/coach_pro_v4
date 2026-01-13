@@ -27,7 +27,7 @@ class CoachRepository {
                                         VALUES (:id_coach, :biographie, :photo, :annees_experience, :certification)");
             $stmt->bindValue(':id_coach', $userId);
             $stmt->bindValue(':biographie', $coach->getBiographie());
-            $stmt->bindValue(':photo', $coach->getPhoto());
+            $stmt->bindValue(':photo', $coach->getPhotoFilename());
             $stmt->bindValue(':annees_experience', $coach->getAnneeExperience());
             $stmt->bindValue(':certification', $coach->getCertefications());
            return  $stmt->execute();
