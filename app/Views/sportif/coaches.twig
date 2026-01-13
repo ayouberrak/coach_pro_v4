@@ -19,7 +19,7 @@
     {% for coache in coaches %}        
         <div class="bg-darkCard border border-borderGray rounded-[2.5rem] p-6 group hover:border-primaryGold/40 transition-all duration-500 shadow-xl">
             <div class="relative mb-6 overflow-hidden rounded-[2rem] h-64 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" 
+                <img src="{{coache.photoPath }}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent opacity-60"></div>
                 <div class="absolute bottom-4 left-4">
@@ -35,11 +35,11 @@
                         <span class="font-black">4.9</span>
                     </div>
                 </div>
-                <p class="text-gray-500 text-xs font-medium line-clamp-2">Expert en transformation physique et prise de masse avec plus de 8 ans d'expérience.</p>
+                <p class="text-gray-500 text-xs font-medium line-clamp-2">{{ coache.biographie }}.</p>
                 
                 <div class="pt-6 flex items-center justify-between border-t border-borderGray/30 mt-4">
-                    <span class="text-white font-black text-sm italic underline decoration-primaryGold/30 underline-offset-4 tracking-tighter">8 Ans Exp.</span>
-                    <a href="/sportif/coach/1" class="p-3 bg-white/5 hover:bg-primaryGold text-white hover:text-darkBg rounded-xl transition-all border border-borderGray">
+                    <span class="text-white font-black text-sm italic underline decoration-primaryGold/30 underline-offset-4 tracking-tighter">{{coache.anneeExperience}} Ans Exp.</span>
+                    <a href="/sportif/coach/{{coache.idCoach}}" class="p-3 bg-white/5 hover:bg-primaryGold text-white hover:text-darkBg rounded-xl transition-all border border-borderGray">
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
                 </div>
