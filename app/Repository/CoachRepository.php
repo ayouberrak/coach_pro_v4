@@ -27,7 +27,7 @@ class CoachRepository {
                                         VALUES (:id_coach, :biographie, :photo, :annees_experience, :certification)");
             $stmt->bindValue(':id_coach', $userId);
             $stmt->bindValue(':biographie', $coach->getBiographie());
-            $stmt->bindValue(':photo', $coach->getPhotoFilename());
+            $stmt->bindValue(':photo', $coach->getPhoto ());
             $stmt->bindValue(':annees_experience', $coach->getAnneeExperience());
             $stmt->bindValue(':certification', $coach->getCertefications());
            return  $stmt->execute();
@@ -49,6 +49,22 @@ class CoachRepository {
             return $coaches;
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de la récupération des coaches: " . $e->getMessage());
+        }
+    }
+
+    public function getCoachById(int $id): ?Coach {
+        try {
+            $stmt = $this->db->prepare("SELECT u.*, c.* FROM users u JOIN coach c ON u.id = c.id_coach WHERE u.id = :id");
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+                return Coach::createFromArrayC($data);
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new \Exception("Erreur lors de la récupération du coach: " . $e->getMessage());
         }
     }
 }
