@@ -13,13 +13,19 @@ class SeanceController extends Controller {
         AuthMiddleware::handleSportif();
 
         $resServices = new ReservationServices();
-        $resServices = $resServices->getReservationsByClientId($_SESSION['user_id']);
+        $resServices->UpdateStatusOnTerminer();
+        $resEnatt = $resServices->getReservationsByClientId($_SESSION['user_id']);
+
+
+        $resTerminer = $resServices->getReservationTerminerByClient($_SESSION['user_id']);
 
         // print_r($resServices);
 
 
         $this->render('sportif/seances.twig', [
                 'user_role' => $user_role ,
-                'reservation' => $resServices]);
+                'reservation' => $resEnatt,
+                'resTerminer' => $resTerminer
+            ]);
     }
 }
