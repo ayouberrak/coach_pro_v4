@@ -57,4 +57,26 @@ class ReservationServices {
         }
     }
 
+    public function getReservationEnattenteByIdCoach(int $idCoach) {
+        try {
+            return $this->reservationRepository->getReservationEnattenteByIdCoach($idCoach);
+        } catch (Exception $e) {
+            throw new Exception("Failed to retrieve reservations: " . $e->getMessage());
+        }
+    }
+
+    public function changeStatusReservation(int $idReservation, int $newStatus) {
+        try {
+            return $this->reservationRepository->changeStatusReservation($idReservation, $newStatus);
+        } catch (Exception $e) {
+            throw new Exception("Failed to change reservation status: " . $e->getMessage());
+        }
+    }
+    public function getReservationByCoachId(int $idCoach) {
+        try {
+            return $this->reservationRepository->getReservationByCoachId($idCoach);
+        } catch (Exception $e) {
+            throw new Exception("Failed to retrieve all reservations: " . $e->getMessage());
+        }
+    }
 }
