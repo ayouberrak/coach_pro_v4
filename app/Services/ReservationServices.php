@@ -79,4 +79,5 @@ class ReservationServices {
             throw new Exception("Failed to retrieve all reservations: " . $e->getMessage());
         }
     }
+    
 }
