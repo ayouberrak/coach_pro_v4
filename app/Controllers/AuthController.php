@@ -54,7 +54,11 @@ class AuthController extends Controller {
 
         try {
             $authService->registerUser($data, $coachData, $sportifData);
-            header("Location: ".BASE_URL."/login");
+            if($role === 2){
+                header("Location: ".BASE_URL."/coach/sport");
+            } elseif($role === 1){
+                header("Location: ".BASE_URL."/login");
+            }
             exit();
         } catch (\Exception $e) {
             $this->render('auth/register.twig', [
