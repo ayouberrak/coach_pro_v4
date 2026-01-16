@@ -13,102 +13,126 @@
         
         <div class="flex p-1 bg-darkCard border border-borderGray rounded-2xl w-fit shadow-2xl">
             <button onclick="filterReservations(event, 'all')" class="tab-btn active-tab px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all">Toutes</button>
-            <button onclick="filterReservations(event, 'en-attente')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">En attente</button>
-            <button onclick="filterReservations(event, 'acceptee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Acceptées</button>
-            <button onclick="filterReservations(event, 'refusee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Refusées</button>
+            <button onclick="filterReservations(event, 'en attente')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">En attente</button>
+            <button onclick="filterReservations(event, 'accepte')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Acceptées</button>
+            <button onclick="filterReservations(event, 'refuse')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Refusées</button>
         </div>
     </div>
 
     <div id="reservations-list" class="grid grid-cols-1 gap-3">
+
+    {% for reservation in reservations %}
+        {# On prépare une classe CSS propre basée sur le statut (ex: "En attente" -> "en-attente") #}
+        {% set statusSlug = reservation.status|lower|replace({' ': '-', 'é': 'e'}) %}
         
-        <div class="res-item en-attente bg-darkCard border border-borderGray rounded-2xl p-5 hover:border-orange-500/30 transition-all">
+        <div class="res-item {{ statusSlug }} bg-darkCard border border-borderGray rounded-2xl p-5 hover:border-primaryGold/30 transition-all duration-300">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center gap-5">
-                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-white/5 rounded-xl border border-white/10">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase">22 Jan</span>
-                        <span class="text-sm font-bold text-white">14:00</span>
+                    <div class="flex flex-col items-center justify-center min-w-[70px] h-16 bg-white/5 rounded-xl border border-white/10">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">{{ reservation.reservation.dateSeance }}</span>
+                        <span class="text-sm font-bold text-white">{{ reservation.reservation.debut }}</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white">Anas Mansouri</h3>
-                        <p class="text-xs text-gray-500 font-medium">Durée: <span class="text-gray-300">1h 00min</span></p>
+                        <h3 class="text-lg font-bold text-white">{{ reservation.nomClient }}</h3>
+                        <p class="text-xs text-gray-500 font-medium">Durée: <span class="text-gray-300">{{ reservation.reservation.duree }} min</span></p>
                     </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[10px] font-black text-orange-500 uppercase tracking-widest">
-                        En attente
-                    </span>
-                </div>
-            </div>
-        </div>
 
-        <div class="res-item acceptee bg-darkCard border border-borderGray rounded-2xl p-5 hover:border-green-500/30 transition-all">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-5">
-                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-green-500/5 rounded-xl border border-green-500/10">
-                        <span class="text-[10px] font-bold text-green-500/70 uppercase">25 Jan</span>
-                        <span class="text-sm font-bold text-white">09:30</span>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Meryem Bennani</h3>
-                        <p class="text-xs text-gray-500 font-medium">Durée: <span class="text-gray-300">45min</span></p>
-                    </div>
-                </div>
                 <div class="flex items-center gap-3">
-                    <span class="px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-[10px] font-black text-green-500 uppercase tracking-widest">
-                        Confirmée
-                    </span>
-                </div>
-            </div>
-        </div>
+                    {% set badgeColor = 'orange' %}
+                    {% if statusSlug == 'accepte' %}{% set badgeColor = 'green' %}
+                    {% elseif statusSlug == 'refuse' %}{% set badgeColor = 'red' %}
+                    {% endif %}
 
-        <div class="res-item refusee bg-darkCard border border-borderGray rounded-2xl p-5 opacity-60">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-5">
-                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-red-500/5 rounded-xl border border-red-500/10 text-red-500/50">
-                        <span class="text-[10px] font-bold uppercase">12 Jan</span>
-                        <span class="text-sm font-bold">18:00</span>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-gray-500 line-through">Omar Sadiki</h3>
-                        <p class="text-xs text-gray-600 font-medium">Durée: 1h 30min</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <span class="px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-[10px] font-black text-red-500/50 uppercase tracking-widest">
-                        Refusée
+                    <span class="px-4 py-1.5 rounded-full bg-{{ badgeColor }}-500/10 border border-{{ badgeColor }}-500/20 text-[10px] font-black text-{{ badgeColor }}-500 uppercase tracking-widest">
+                        {{ reservation.status }}
                     </span>
                 </div>
             </div>
         </div>
+    {% else %}
+        <div class="text-center py-20 bg-darkCard rounded-2xl border border-dashed border-borderGray">
+            <p class="text-gray-500">Aucune réservation pour le moment.</p>
+        </div>
+    {% endfor %}
 
     </div>
 </div>
 
 <style>
-    .active-tab { background-color: #cfaa58 !important; color: #18191e !important; box-shadow: 0 4px 15px rgba(207, 170, 88, 0.2); }
-    .hidden-res { display: none !important; }
+    /* Tab Active Style */
+    .active-tab { 
+        background-color: #cfaa58 !important; 
+        color: #18191e !important; 
+        box-shadow: 0 4px 15px rgba(207, 170, 88, 0.3); 
+    }
+
+    /* Animation de filtrage */
+    .res-item {
+        display: block;
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .hidden-res { 
+        display: none !important; 
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Couleurs utilitaires (au cas où Tailwind ne les génère pas dynamiquement) */
+    .text-green-500 { color: #10b981; }
+    .bg-green-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+    .border-green-500\/20 { border-color: rgba(16, 185, 129, 0.2); }
+    
+    .text-red-500 { color: #ef4444; }
+    .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.1); }
+    .border-red-500\/20 { border-color: rgba(239, 68, 68, 0.2); }
 </style>
 
 <script>
     function filterReservations(event, filter) {
-        // Gestion des onglets
+        // 1. Mise à jour de l'apparence des boutons
         const buttons = document.querySelectorAll('.tab-btn');
         buttons.forEach(btn => {
             btn.classList.remove('active-tab');
             btn.classList.add('text-gray-500');
         });
-        event.currentTarget.classList.add('active-tab');
-        event.currentTarget.classList.remove('text-gray-500');
+        
+        const clickedBtn = event.currentTarget;
+        clickedBtn.classList.add('active-tab');
+        clickedBtn.classList.remove('text-gray-500');
 
-        // Filtrage des éléments
+        // 2. Filtrage des éléments
         const items = document.querySelectorAll('.res-item');
+        let countVisible = 0;
+
         items.forEach(item => {
-            if (filter === 'all') {
+            if (filter === 'all' || item.classList.contains(filter)) {
                 item.classList.remove('hidden-res');
+                countVisible++;
             } else {
-                item.classList.toggle('hidden-res', !item.classList.contains(filter));
+                item.classList.add('hidden-res');
             }
         });
+
+        // 3. Gestion du message "Aucun résultat"
+        const listContainer = document.getElementById('reservations-list');
+        let emptyMsg = document.getElementById('empty-filter-msg');
+
+        if (countVisible === 0) {
+            if (!emptyMsg) {
+                emptyMsg = document.createElement('div');
+                emptyMsg.id = 'empty-filter-msg';
+                emptyMsg.className = 'text-center py-10 text-gray-500 italic';
+                emptyMsg.innerHTML = 'Aucune réservation trouvée pour ce filtre.';
+                listContainer.appendChild(emptyMsg);
+            }
+        } else if (emptyMsg) {
+            emptyMsg.remove();
+        }
     }
 </script>
 {% endblock %}
