@@ -25,6 +25,7 @@ $router->get('/coach/dashboard', [App\Controllers\CoachController::class, 'dashb
 $router->get('/coach/dashboard/accept/{id}', [App\Controllers\ReservationController::class, 'acceptReservation']);
 $router->get('/coach/dashboard/refuse/{id}', [App\Controllers\ReservationController::class, 'declineReservation']);
 
+$router->post('/coach/disponibilities', [App\Controllers\DispoController::class, 'create']);
 
 
 $router->get('/sportif/dashboard', [App\Controllers\SportifController::class, 'index']);
