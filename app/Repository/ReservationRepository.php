@@ -126,5 +126,81 @@ class ReservationRepository {
         }
     }
 
-    
+
+    public function getReservationEnattenteByIdCoach(int $idCoach): array {
+        try {
+            $stmt = $this->db->prepare("SELECT *   FROM seances s
+                                                inner join users u on u.id = s.id_client
+                                                inner join client cl on cl.id_client = u.id
+                                                inner join status st on st.id_status = s.id_status
+                                                WHERE id_coach = :id_coach
+                                                AND s.id_status = 3 ");
+
+            $stmt->bindValue(':id_coach', $idCoach, PDO::PARAM_INT);
+            $stmt->execute();
+            $reservationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $info = [];
+            foreach ($reservationsData as $data) {
+                $info[] = [
+                    'reservation' => new Reservation(
+                        $data['id_seance'],
+                        $data['id_client'],
+                        $data['id_coach'],
+                        $data['date_seance'],
+                        $data['debut'],
+                        $data['duree'],
+                        $data['id_status']
+                    ),
+                    'nomClient' => $data['prenom'] . ' ' . $data['nom'],
+                ];
+            }
+            return $info;
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la récupération des réservations: " . $e->getMessage());
+        }
+    }
+
+
+    public function changeStatusReservation($idReservation, $newStatus): bool {
+        try {
+            $stmt = $this->db->prepare("UPDATE seances SET id_status = :new_status WHERE id_seance = :id_reservation");
+            $stmt->bindValue(':new_status', $newStatus, PDO::PARAM_INT);
+            $stmt->bindValue(':id_reservation', $idReservation, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la mise à jour du statut de la réservation: " . $e->getMessage());
+        }
+    }
+
+
+    public function getReservationByCoachId(int $idCoach): array {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM seances s inner join users u on u.id = s.id_client WHERE s.id_coach = :id_coach");
+            $stmt->bindValue(':id_coach', $idCoach, PDO::PARAM_INT);
+            $stmt->execute();
+            $reservationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $reservations = [];
+            foreach ($reservationsData as $data) {
+                $reservations[] = [
+                    'reservation' => new Reservation(
+                        $data['id_seance'],
+                        $data['id_client'],
+                        $data['id_coach'],
+                        $data['date_seance'],
+                        $data['debut'],
+                        $data['duree'],
+                        $data['id_status']
+                    ),
+                    'nomClient' => $data['prenom'] . ' ' . $data['nom'],
+                ];
+            }
+            return $reservations;
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la récupération des réservations: " . $e->getMessage());
+        }
+    }   
+
+
 }
