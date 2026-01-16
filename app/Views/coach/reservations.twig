@@ -7,100 +7,76 @@
 
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-borderGray/30 pb-8">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-white">Historique des <span class="text-primaryGold">Séances</span></h1>
-            <p class="text-gray-500 mt-1 font-medium">Consultez l'état de vos réservations passées et futures.</p>
+            <h1 class="text-3xl font-bold tracking-tight text-white">Mes <span class="text-primaryGold">Réservations</span></h1>
+            <p class="text-gray-500 mt-1 font-medium">Gestion simplifiée de votre emploi du temps.</p>
         </div>
         
         <div class="flex p-1 bg-darkCard border border-borderGray rounded-2xl w-fit shadow-2xl">
-            <button onclick="filterReservations('all')" class="tab-btn active-tab px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all">Toutes</button>
-            <button onclick="filterReservations('en-attente')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">En attente</button>
-            <button onclick="filterReservations('acceptee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Acceptées</button>
-            <button onclick="filterReservations('refusee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Refusées</button>
-            <button onclick="filterReservations('terminee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Terminées</button>
+            <button onclick="filterReservations(event, 'all')" class="tab-btn active-tab px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all">Toutes</button>
+            <button onclick="filterReservations(event, 'en-attente')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">En attente</button>
+            <button onclick="filterReservations(event, 'acceptee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Acceptées</button>
+            <button onclick="filterReservations(event, 'refusee')" class="tab-btn px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all">Refusées</button>
         </div>
     </div>
 
-    <div id="reservations-list" class="grid grid-cols-1 gap-4">
+    <div id="reservations-list" class="grid grid-cols-1 gap-3">
         
-        <div class="res-item en-attente bg-darkCard border border-borderGray rounded-[2rem] p-6 group transition-all">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex items-center gap-6">
-                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex flex-col items-center justify-center text-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
-                        <span class="text-[9px] font-black uppercase">JAN</span>
-                        <span class="text-lg font-black tracking-tighter">22</span>
+        <div class="res-item en-attente bg-darkCard border border-borderGray rounded-2xl p-5 hover:border-orange-500/30 transition-all">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-5">
+                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-white/5 rounded-xl border border-white/10">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">22 Jan</span>
+                        <span class="text-sm font-bold text-white">14:00</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white tracking-tight">Anas Mansouri</h3>
-                        <div class="flex items-center gap-3 mt-1">
-                            <span class="text-xs text-gray-500 font-medium tracking-tight italic">Boxe Anglaise • 14:00</span>
-                            <span class="w-1 h-1 rounded-full bg-gray-700"></span>
-                            <span class="text-[9px] font-black text-orange-500 uppercase tracking-widest">En attente de validation</span>
-                        </div>
+                        <h3 class="text-lg font-bold text-white">Anas Mansouri</h3>
+                        <p class="text-xs text-gray-500 font-medium">Durée: <span class="text-gray-300">1h 00min</span></p>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 text-gray-600 italic text-xs border-l border-borderGray/30 pl-6">
-                    <i class="fa-solid fa-hourglass-start animate-spin-slow"></i>
-                    <span>Action requise sur le Dashboard</span>
+                <div class="flex items-center gap-3">
+                    <span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[10px] font-black text-orange-500 uppercase tracking-widest">
+                        En attente
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div class="res-item acceptee bg-darkCard border border-green-500/20 rounded-[2rem] p-6 transition-all">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex items-center gap-6">
-                    <div class="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/20 flex flex-col items-center justify-center text-green-500">
-                        <span class="text-[9px] font-black uppercase">JAN</span>
-                        <span class="text-lg font-black tracking-tighter">25</span>
+        <div class="res-item acceptee bg-darkCard border border-borderGray rounded-2xl p-5 hover:border-green-500/30 transition-all">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-5">
+                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-green-500/5 rounded-xl border border-green-500/10">
+                        <span class="text-[10px] font-bold text-green-500/70 uppercase">25 Jan</span>
+                        <span class="text-sm font-bold text-white">09:30</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white tracking-tight">Meryem Bennani</h3>
-                        <div class="flex items-center gap-3 mt-1">
-                            <span class="text-xs text-gray-400 font-medium">Pilates • 09:30</span>
-                            <span class="w-1 h-1 rounded-full bg-green-500"></span>
-                            <span class="text-[9px] font-black text-green-500 uppercase tracking-widest">Confirmée</span>
-                        </div>
+                        <h3 class="text-lg font-bold text-white">Meryem Bennani</h3>
+                        <p class="text-xs text-gray-500 font-medium">Durée: <span class="text-gray-300">45min</span></p>
                     </div>
                 </div>
-                <div class="bg-green-500/5 px-4 py-2 rounded-xl border border-green-500/10">
-                    <p class="text-[10px] font-bold text-green-600 uppercase tracking-tighter">Séance programmée</p>
+                <div class="flex items-center gap-3">
+                    <span class="px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-[10px] font-black text-green-500 uppercase tracking-widest">
+                        Confirmée
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div class="res-item refusee bg-darkCard/50 border border-red-500/10 rounded-[2rem] p-6 opacity-60">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex items-center gap-6">
-                    <div class="w-14 h-14 rounded-2xl bg-red-500/5 border border-red-500/10 flex flex-col items-center justify-center text-red-500/40">
-                        <span class="text-[9px] font-black uppercase">JAN</span>
-                        <span class="text-lg font-black tracking-tighter">12</span>
+        <div class="res-item refusee bg-darkCard border border-borderGray rounded-2xl p-5 opacity-60">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-5">
+                    <div class="flex flex-col items-center justify-center min-w-[60px] h-14 bg-red-500/5 rounded-xl border border-red-500/10 text-red-500/50">
+                        <span class="text-[10px] font-bold uppercase">12 Jan</span>
+                        <span class="text-sm font-bold">18:00</span>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-500 line-through">Omar Sadiki</h3>
-                        <p class="text-[9px] font-black text-red-500/60 uppercase tracking-widest mt-1">Demande déclinée</p>
+                        <p class="text-xs text-gray-600 font-medium">Durée: 1h 30min</p>
                     </div>
                 </div>
-                <span class="text-[10px] text-gray-600 font-medium italic">Indisponible</span>
-            </div>
-        </div>
-
-        <div class="res-item terminee bg-darkCard/20 border border-borderGray/30 rounded-[2rem] p-6 grayscale">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex items-center gap-6">
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center text-gray-500">
-                        <span class="text-[9px] font-black uppercase">JAN</span>
-                        <span class="text-lg font-black tracking-tighter">05</span>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-gray-600">Sami Alami</h3>
-                        <p class="text-[10px] text-gray-700 font-bold uppercase tracking-widest mt-1">Effectuée le 05 Jan</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-1 text-primaryGold/40">
-                    <i class="fa-solid fa-star text-[10px]"></i>
-                    <i class="fa-solid fa-star text-[10px]"></i>
-                    <i class="fa-solid fa-star text-[10px]"></i>
-                    <i class="fa-solid fa-star text-[10px]"></i>
-                    <i class="fa-solid fa-star text-[10px]"></i>
+                <div class="flex items-center gap-3">
+                    <span class="px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-[10px] font-black text-red-500/50 uppercase tracking-widest">
+                        Refusée
+                    </span>
                 </div>
             </div>
         </div>
@@ -111,16 +87,20 @@
 <style>
     .active-tab { background-color: #cfaa58 !important; color: #18191e !important; box-shadow: 0 4px 15px rgba(207, 170, 88, 0.2); }
     .hidden-res { display: none !important; }
-    .animate-spin-slow { animation: spin 3s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 </style>
 
 <script>
-    function filterReservations(filter) {
+    function filterReservations(event, filter) {
+        // Gestion des onglets
         const buttons = document.querySelectorAll('.tab-btn');
-        buttons.forEach(btn => btn.classList.remove('active-tab'));
-        event.target.classList.add('active-tab');
+        buttons.forEach(btn => {
+            btn.classList.remove('active-tab');
+            btn.classList.add('text-gray-500');
+        });
+        event.currentTarget.classList.add('active-tab');
+        event.currentTarget.classList.remove('text-gray-500');
 
+        // Filtrage des éléments
         const items = document.querySelectorAll('.res-item');
         items.forEach(item => {
             if (filter === 'all') {
