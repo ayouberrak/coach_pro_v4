@@ -176,7 +176,10 @@ class ReservationRepository {
 
     public function getReservationByCoachId(int $idCoach): array {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM seances s inner join users u on u.id = s.id_client WHERE s.id_coach = :id_coach");
+            $stmt = $this->db->prepare("SELECT * FROM seances s 
+                                                inner join users u on u.id = s.id_client
+                                                inner join status st on st.id_status = s.id_status
+                                                 WHERE s.id_coach = :id_coach");
             $stmt->bindValue(':id_coach', $idCoach, PDO::PARAM_INT);
             $stmt->execute();
             $reservationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -194,6 +197,7 @@ class ReservationRepository {
                         $data['id_status']
                     ),
                     'nomClient' => $data['prenom'] . ' ' . $data['nom'],
+                    'status' => $data['type_status']
                 ];
             }
             return $reservations;
