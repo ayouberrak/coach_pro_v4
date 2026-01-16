@@ -35,6 +35,8 @@ class Router {
 
 
 
+        
+
         $callback = false;
         $params=[];
         if (isset($this->routes[$method])) {

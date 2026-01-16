@@ -69,6 +69,9 @@ class AuthController extends Controller {
         }
     }
 
+
+    
+
     public function Login() {
         $authService = new AuthServices();
 

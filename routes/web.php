@@ -40,3 +40,5 @@ $router->post('/sportif/coach/details/{id}', [App\Controllers\DetailsCoachContro
 
 $router->get('/login', [App\Controllers\AuthController::class, 'login']);
 
+
+
